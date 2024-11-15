@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# gettext
+*.pot
+*.po
+
 # C extensions
 *.so
 

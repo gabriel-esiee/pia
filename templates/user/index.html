@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1>{{ gettext('Welcome to your account page, {}!').format(username) }}</h1>
+<p>{{ gettext('Customize your account here.') }}</p>
+{% endblock %}
