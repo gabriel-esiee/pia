@@ -1,11 +1,11 @@
 from flask import Blueprint
+from app.routes.user import user_blueprint
+from app.controllers import get_index
 
-blueprint = Blueprint('blueprint', __name__, template_folder='templates')
+main_blueprint = Blueprint('main', __name__, template_folder='templates')
 
-from .index import index_blueprint
+main_blueprint.register_blueprint(user_blueprint, url_prefix='/user')
 
-blueprint.register_blueprint(index_blueprint, url_prefix='/')
-
-from .user import user_blueprint
-
-blueprint.register_blueprint(user_blueprint, url_prefix='/user')
+@main_blueprint.route('/')
+def index():
+    return get_index()

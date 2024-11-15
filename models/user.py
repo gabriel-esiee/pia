@@ -1,6 +1,8 @@
-class User:
-    def __init__(self) -> None:
-        pass
+from app import database
+from flask_login import UserMixin
 
-    def getName(self) -> str:
-        return "Gabriel"
+class User(UserMixin, database.Model):
+    id = database.Column(database.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    email = database.Column(database.String(100), unique=True)
+    password = database.Column(database.String(100))
+    name = database.Column(database.String(1000))

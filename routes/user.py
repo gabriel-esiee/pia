@@ -1,13 +1,29 @@
-from flask import Blueprint
-from app.controllers.user import get_index, get_login
+from flask import Blueprint, request
+from flask_login import login_required
+from app.controllers.user import profile_get, signup_get, signup_post, login_get, login_post, logout_get
 
-user_blueprint = Blueprint('user_blueprint', __name__)
+user_blueprint = Blueprint('user', __name__)
 
-@user_blueprint.route('/')
-def index():
-    
-    return get_index()
+@user_blueprint.route('/', methods=['GET'])
+@login_required
+def profile():
+    return profile_get()
 
-@user_blueprint.route('/login')
+@user_blueprint.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'GET':
+        return signup_get()
+    elif request.method == 'POST':
+        return signup_post(request.form)
+
+@user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    return get_login()
+    if request.method == 'GET':
+        return login_get()
+    elif request.method == 'POST':
+        return login_post(request.form)
+
+@user_blueprint.route('/logout')
+@login_required
+def logout():
+    return logout_get()

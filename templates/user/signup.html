@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Signup{% endblock %}
 
 {% block content %}
 
@@ -11,9 +11,13 @@
 {% endif %}
 {% endwith %}
 
-<h1>Login to your account</h1>
+<h1>Create an account</h1>
 
-<form method="post" action="/user/login">
+<form method="post" action="/user/signup">
+    <label for="name">
+        Your name
+        <input type="text" name="name" id="" placeholder="Your firstname here">
+    </label><br>
     <label for="email">
         Your email
         <input type="email" name="email" id="" placeholder="Your email address here">
