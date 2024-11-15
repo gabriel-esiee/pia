@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Create new damage{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div style="color: red;">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+<h1>Create new damage</h1>
+
+<form method="post" action="{{ url_for('main.damage.new') }}">
+    <label for="description">The description of the damage</label>
+    <textarea name="description" id="" placeholder="Describe the damage here..."></textarea>
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

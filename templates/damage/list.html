@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<h1 class="title">{{ title }}</h1>
+
+<ul>
+    {% for damage in damages %}
+        <li>
+            Damage #{{ damage.id }} - Description: {{ damage.description }} - Author: {{ damage.user.name }}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

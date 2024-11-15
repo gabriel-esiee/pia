@@ -13,7 +13,7 @@
 
 <h1>Create an account</h1>
 
-<form method="post" action="/user/signup">
+<form method="post" action="{{ url_for('main.user.signup') }}">
     <label for="name">
         Your name
         <input type="text" name="name" id="" placeholder="Your firstname here">

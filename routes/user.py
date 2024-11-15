@@ -1,13 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.controllers.user import profile_get, signup_get, signup_post, login_get, login_post, logout_get
+from app.controllers.user import signup_get, signup_post, login_get, login_post, logout_get, profile_get, damages_get
 
 user_blueprint = Blueprint('user', __name__)
-
-@user_blueprint.route('/', methods=['GET'])
-@login_required
-def profile():
-    return profile_get()
 
 @user_blueprint.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -27,3 +22,13 @@ def login():
 @login_required
 def logout():
     return logout_get()
+
+@user_blueprint.route('/user', methods=['GET'])
+@login_required
+def profile():
+    return profile_get()
+
+@user_blueprint.route('/user/damages', methods=['GET'])
+@login_required
+def damages():
+    return damages_get()

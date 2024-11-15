@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Damage #{{ damage.id }}{% endblock %}
+
+{% block content %}
+
+<h1 class="title">Damage #{{ damage.id }}</h1>
+<p>Description: {{ damage.description }}</p>
+<p>Author: {{ damage.user.name }}</p>
+
+{% endblock %}

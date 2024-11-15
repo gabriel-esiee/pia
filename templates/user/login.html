@@ -13,7 +13,7 @@
 
 <h1>Login to your account</h1>
 
-<form method="post" action="/user/login">
+<form method="post" action="{{ url_for('main.user.login') }}">
     <label for="email">
         Your email
         <input type="email" name="email" id="" placeholder="Your email address here">
