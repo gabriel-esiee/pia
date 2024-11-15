@@ -3,14 +3,35 @@
 
 {% block content %}
 
-<h1 class="title">{{ title }}</h1>
-
-<ul>
-    {% for damage in damages %}
-        <li>
-            Damage #{{ damage.id }} - Description: {{ damage.description }} - Author: {{ damage.user.name }}
-        </li>
-    {% endfor %}
-</ul>
+<h1 class="title is-1">{{ title }}</h1>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Identifier</th>
+            <th scope="col">Description</th>
+            <th scope="col">Author</th>
+            <th scope="col">State</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for damage in damages %}
+        <tr>
+            <th scope="row">{{ damage.id }}</th>
+            <td>{{ damage.description }}</td>
+            <td>{{ damage.user.name }}</td>
+            <td>{{ damage.state }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="col">Identifier</th>
+            <th scope="col">Description</th>
+            <th scope="col">Author</th>
+            <th scope="col">State</th>
+        </tr>
+    </tfoot>
+</table>
 
 {% endblock %}

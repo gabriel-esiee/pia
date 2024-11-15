@@ -11,22 +11,40 @@
 {% endif %}
 {% endwith %}
 
-<h1>Create an account</h1>
-
+<h1 class="title is-1">Create an account</h1>
+<hr>
 <form method="post" action="{{ url_for('main.user.signup') }}">
-    <label for="name">
-        Your name
-        <input type="text" name="name" id="" placeholder="Your firstname here">
-    </label><br>
-    <label for="email">
-        Your email
-        <input type="email" name="email" id="" placeholder="Your email address here">
-    </label><br>
-    <label for="password">
-        Your password
-        <input type="password" name="password" id="" placeholder="Your password here">
-    </label><br>
-    <button type="submit">Submit</button>
+    <div class="field">
+        <label class="label" for="name">Name</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" name="name" placeholder="Joe" value="">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="email">Email</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="email" name="email" placeholder="your@email.com" value="">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="password">Password</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="password" name="password" placeholder="●●●●●" value="">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+    </div>
+    <div class="buttons">
+        <button class="button is-primary" type="submit">Create account</button>
+        <a href="{{ url_for("main.user.login") }}" class="button is-link is-light">Already have an account?</a>
+    </div>
 </form>
 
 {% endblock %}

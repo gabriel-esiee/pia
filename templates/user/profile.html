@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Your profile{% endblock %}
 
 {% block content %}
-<h1>{{ gettext('Welcome to your account page, {}!').format(username) }}</h1>
-<p>{{ gettext('Customize your account here.') }}</p>
+<h1 class="title is-1">{{ gettext('Welcome to your account page, {}!').format(username) }}</h1>
+<hr>
+<div class="buttons">
+    <a href="{{ url_for('main.user.damages') }}" class="button is-link is-light">Check your opened damages</a>
+    <a href="{{ url_for('main.user.logout') }}" class="button is-danger">Logout</a>
+</div>
 {% endblock %}

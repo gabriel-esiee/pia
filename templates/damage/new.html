@@ -11,12 +11,16 @@
 {% endif %}
 {% endwith %}
 
-<h1>Create new damage</h1>
-
+<h1 class="title is-1">Create new damage</h1>
+<hr>
 <form method="post" action="{{ url_for('main.damage.new') }}">
-    <label for="description">The description of the damage</label>
-    <textarea name="description" id="" placeholder="Describe the damage here..."></textarea>
-    <button type="submit">Submit</button>
+    <div class="field">
+        <label class="label" for="description">Description of the damage</label>
+        <div class="control">
+            <textarea class="textarea" name="description" placeholder="Your description here..."></textarea>
+        </div>
+    </div>
+    <button class="button is-primary" type="submit">Send new damage</button>
 </form>
 
 {% endblock %}
