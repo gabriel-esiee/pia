@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user
-from app.models import add
+from app.models import insert
 from app.models.user import User
 from app.models.damage import Damage
 
@@ -21,7 +21,7 @@ def signup_post(form):
 
     hash = generate_password_hash(password, method='pbkdf2:sha256')
     new_user = User(email=email, name=name, password=hash)
-    add(new_user)
+    insert(new_user)
 
     return redirect(url_for('main.user.login'))
 
@@ -51,4 +51,4 @@ def profile_get():
     return render_template('user/profile.html', username=current_user.name)
 
 def damages_get():
-    return render_template('damage/list.html', title="All your damages", damages=current_user.damages)
+    return render_template('damage/list.html', title="All your damages", damages=current_user.insured_damages)

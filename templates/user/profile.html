@@ -5,6 +5,7 @@
 <h1 class="title is-1">{{ gettext('Welcome to your account page, {}!').format(username) }}</h1>
 <hr>
 <div class="buttons">
+    <a href="{{ url_for('main.damage.new') }}" class="button is-primary is-light">Declare a new damage</a>
     <a href="{{ url_for('main.user.damages') }}" class="button is-link is-light">Check your opened damages</a>
     <a href="{{ url_for('main.user.logout') }}" class="button is-danger">Logout</a>
 </div>
