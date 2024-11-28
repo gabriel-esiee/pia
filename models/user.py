@@ -10,7 +10,6 @@ class User(UserMixin, db.Model):
     role = db.Column(db.Enum(UserRole), nullable=False, default=UserRole.INSURED)
     
     def is_admin(self) -> bool:
-        print("User's role is", self.role)
         return self.role == UserRole.INVESTIGATOR
     
     def list_endpoint(self) -> str:

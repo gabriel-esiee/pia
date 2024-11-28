@@ -22,6 +22,7 @@ def signup_post(form):
     new_user = User(email=email, name=name, password=hash)
     insert(new_user)
 
+    flash('Your account has been created successfully. Please log in using your login details.')
     return redirect(url_for('main.user.login'))
 
 def login_get():

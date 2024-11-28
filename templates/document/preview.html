@@ -1,0 +1,6 @@
+<a href="{{ url_for('main.document.single', document_id=document.id) }}">
+    <span class="icon">
+        <i class="fas fa-file"></i>
+    </span>
+    {{ gettext('Document #{}').format(document.id) }} ({{ document.date.strftime('%d/%m/%Y') }})
+</a>
