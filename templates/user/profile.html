@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block title %}Your profile{% endblock %}
+
+{% block content %}
+
+<h1 class="title is-1">{{ gettext('Welcome to your account page, {}!').format(current_user.name) }}</h1>
+<hr>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        <button class="delete"></button>
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+<div class="grid">
+    <div class="cell">
+        <div class="field">
+            <label class="label">
+                <span class="icon-text">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span>{{ gettext('Name') }}</span>
+                </span>
+            </label>
+            <p>{{ current_user.name }}</p>
+        </div>
+        <div class="field">
+            <label class="label">
+                <span class="icon-text">
+                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                    <span>{{ gettext('Email') }}</span>
+                </span>
+            </label>
+            <p>{{ current_user.email }}</p>
+        </div>
+        <div class="field">
+            <label class="label">
+                <span class="icon-text">
+                    <span class="icon"><i class="fas fa-user-tag"></i></span>
+                    <span>{{ gettext('Role') }}</span>
+                </span>
+            </label>
+            <p>{{ current_user.role }}</p>
+        </div>
+    </div>
+    <div class="cell">
+        <div class="buttons">
+            <a href="{{ url_for('main.damage.new') }}" class="button is-primary is-light">
+                <span class="icon is-small">
+                    <i class="fas fa-plus-square"></i>
+                </span>
+                <span>{{ gettext('Declare a damage') }}</span>
+            </a>
+            <a href="{{ url_for('main.user.damages') }}" class="button is-link is-light">
+                <span class="icon is-small">
+                    <i class="fas fa-eye"></i>
+                </span>
+                <span>{{ gettext('Check your damages') }}</span>
+            </a>
+            <a href="{{ url_for('main.user.logout') }}" class="button is-danger">
+                <span class="icon is-small">
+                    <i class="fas fa-sign-out-alt"></i>
+                </span>
+                <span>{{ gettext('Log out') }}</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}Resource not found{% endblock %}
+
+{% block content %}
+
+<div class="container is-fluid has-text-centered">
+    <div class="">
+        <p class="title">{{ gettext('Error 404') }}</p>
+        <p class="subtitle">{{ gettext('The resource you requested does not exist') }}</p>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+# TODO
+
+- Document upload and approve system
+- List impaired damages on a user (not only insured damages)
+- Correct logging system
+- Communication between investigator and user via websockets
+- OAuth login system
+- Unit testing
+
+# Configuration
+
+## Lancement de l'application
+
+source venv/Scripts/activate
+flask run --debug
+
+## Extraction des dictionnaires de traduction
+
+source venv/Scripts/activate
+pybabel extract -F babel.cfg -o messages.pot .
+pybabel init -i messages.pot -d translations -l fr
+
+## Compilation des dictionnaires de traduction
+
+source venv/Scripts/activate
+pybabel compile -d translations

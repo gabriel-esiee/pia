@@ -1,0 +1,42 @@
+<header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{{ url_for('main.index') }}">
+                    <span class="icon is-small">
+                        <i class="fas fa-home"></i>
+                    </span>
+                    <span>{{ gettext('Home') }}</span>
+                </a>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                <a class="navbar-item" href="{{ url_for('main.damage.all') }}">{{ gettext('All damages') }}</a>
+                <a class="navbar-item" href="{{ url_for('main.damage.unresolved') }}">{{ gettext('All unresolved damages') }}</a>
+                {% endif %}
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {% if current_user.is_authenticated %}
+                        <a class="button is-primary" href="{{ url_for('main.user.profile') }}">
+                            <span class="icon is-small">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <span>{{ gettext('Profile') }}</span>
+                        </a>
+                        <a class="button is-danger" href="{{ url_for('main.user.logout') }}">
+                            <span class="icon is-small">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </span>
+                            <span>{{ gettext('Log out') }}</span>
+                        </a>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                        <a class="button is-primary" href="{{ url_for('main.user.signup') }}"><strong>{{ gettext('Sign up') }}</strong></a>
+                        <a class="button is-light" href="{{ url_for('main.user.login') }}">{{ gettext('Log in') }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

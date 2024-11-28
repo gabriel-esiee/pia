@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div style="color: red;">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+
+<h1 class="title is-1">{{ gettext('Create an account') }}</h1>
+<hr>
+<form method="post" action="{{ url_for('main.user.signup') }}">
+    <div class="field">
+        <label class="label" for="name">{{ gettext('Name') }}</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" name="name" placeholder="Joe">
+            <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+            </span>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="email">{{ gettext('Email') }}</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="email" name="email" placeholder="{{ gettext('your@email.com') }}">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="password">{{ gettext('Password') }}</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="password" name="password" placeholder="●●●●●">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+    </div>
+    <div class="buttons">
+        <button class="button is-link" type="submit">{{ gettext('Create account') }}</button>
+        <a href="{{ url_for("main.user.login") }}" class="button is-link is-light">{{ gettext('Already have an account?') }}</a>
+    </div>
+</form>
+
+{% endblock %}
