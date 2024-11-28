@@ -1,6 +1,6 @@
-<a href="{{ url_for('main.damage.single', damage_id=damage.id) }}">
+<a class="button is-link is-outlined" href="{{ url_for('main.damage.single', damage_id=damage.id) }}">
     <span class="icon">
         <i class="fas fa-bolt"></i>
     </span>
-    {{ gettext('Damage #{}').format(damage.id) }} ({{ damage.date.strftime('%d/%m/%Y') }})
+    <span>{{ gettext('Damage #{}').format(damage.id) }} ({{ damage.date.strftime('%d/%m/%Y') }})</span>
 </a>

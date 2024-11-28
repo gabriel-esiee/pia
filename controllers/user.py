@@ -1,6 +1,7 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user
+from app import google
 from app.models.database import insert
 from app.models.user import User
 
@@ -42,7 +43,29 @@ def login_post(form):
     
     return redirect(url_for('main.user.profile'))
 
+def oauth_google_get():
+    redirect_uri = url_for('main.user.authorize_google', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+def authorize_google_get():
+    token = google.authorize_access_token()
+    user_info = google.get('userinfo').json()
+    email = user_info['email']
+    name = user_info['name']
+
+    user = User.query.filter_by(email=email).first()
+    if user:
+        login_user(user)
+    else:
+        new_user = User(email=email, name=name)
+        insert(new_user)
+        login_user(new_user)
+
+    # session['user'] = user_info
+    return redirect(url_for('main.user.profile'))
+
 def logout_get():
+    session.pop('user', None)
     logout_user()
     return redirect(url_for('main.user.login'))
 

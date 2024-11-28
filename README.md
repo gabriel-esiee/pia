@@ -4,7 +4,6 @@
 - List impaired damages on a user (not only insured damages)
 - Correct logging system
 - Communication between investigator and user via websockets
-- OAuth login system
 - Unit testing
 
 # Configuration

@@ -3,6 +3,7 @@ from flask import Flask, request, render_template
 from flask_babel import Babel
 from flask_login import LoginManager
 
+from app import oauth
 from app.routes.home import main_blueprint
 from app.models.database import db
 from app.models.user import User
@@ -40,3 +41,8 @@ login.init_app(app)
 @login.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+# Initialize OAuth
+app.config['GOOGLE_CLIENT_ID'] = '72701988235-3bqpnaugrhnl6ktte3ub4i6le7osc9lg.apps.googleusercontent.com'
+app.config['GOOGLE_CLIENT_SECRET'] = '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'
+oauth.init_app(app)

@@ -85,25 +85,19 @@
         </div>
     </div>
     <h3 class="title is-3">{{ gettext('Associated documents') }}</h3>
-    <div>
-        <div class="field">
-            {% for document in damage.documents %}
-                {% with document=document %}
-                        <a href="{{ url_for('main.document.single', document_id=document.id) }}">
-                            {% include 'document/preview.html' %}
-                        </a>
-                {% endwith %}
-            {% endfor %}
-        </div>
+    <div class="buttons">
+        {% for document in damage.documents %}
+            {% with document=document %}
+                {% include 'document/preview.html' %}
+            {% endwith %}
+        {% endfor %}
         {% if current_user.is_authenticated %}
-            <div class="buttons">
-                <a href="{{ url_for('main.document.new', damage=damage.id) }}" class="button is-primary is-light">
-                    <span class="icon is-small">
-                        <i class="fas fa-upload"></i>
-                    </span>
-                    <span>{{ gettext('Upload a new document') }}</span>
-                </a>
-            </div>
+        <a href="{{ url_for('main.document.new', damage=damage.id) }}" class="button is-primary is-light">
+            <span class="icon is-small">
+                <i class="fas fa-upload"></i>
+            </span>
+            <span>{{ gettext('Upload a new document') }}</span>
+        </a>
         {% endif %}
     </div>
 </div>

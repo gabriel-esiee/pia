@@ -2,50 +2,60 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-
-<h1 class="title is-1">{{ gettext('Login to your account') }}</h1>
-<hr>
-
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    <div class="notification is-danger">
-        <button class="delete"></button>
-        {{ messages[0] }}
-    </div>
-{% endif %}
-{% endwith %}
-
-<form method="post" action="{{ url_for('main.user.login') }}">
-    <div class="field">
-        <label class="label" for="email">{{ gettext('Email') }}</label>
-        <div class="control has-icons-left has-icons-right">
-            <input class="input" type="email" name="email" placeholder="{{ gettext('your@email.com') }}" value="">
-            <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-            </span>
+<div class="content">
+    <h1 class="title is-1">{{ gettext('Login to your account') }}</h1>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger">
+            <button class="delete"></button>
+            {{ messages[0] }}
         </div>
-    </div>
-    <div class="field">
-        <label class="label" for="password">{{ gettext('Password') }}</label>
-        <div class="control has-icons-left has-icons-right">
-            <input class="input" type="password" name="password" placeholder="●●●●●" value="">
-            <span class="icon is-small is-left">
-                <i class="fas fa-lock"></i>
-            </span>
+    {% endif %}
+    {% endwith %}
+    <form method="post" action="{{ url_for('main.user.login') }}">
+        <div class="field">
+            <label class="label" for="email">{{ gettext('Email') }}</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="email" name="email" placeholder="{{ gettext('your@email.com') }}" value="">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <div class="control">
-            <label class="checkbox">
-                <input type="checkbox" name="remember"/>
-                {{ gettext('Remember me') }}
-            </label>
+        <div class="field">
+            <label class="label" for="password">{{ gettext('Password') }}</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="password" name="password" placeholder="●●●●●" value="">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </div>
         </div>
-    </div>
-    <div class="buttons">
-        <button class="button is-link" type="submit">{{ gettext('Log in') }}</button>
-        <a href="{{ url_for("main.user.signup") }}" class="button is-link is-light">{{ gettext('Create an account') }}</a>
-    </div>
-</form>
-
+        <div class="field">
+            <div class="control">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember"/>
+                    {{ gettext('Remember me') }}
+                </label>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="button is-link" type="submit">{{ gettext('Log in') }}</button>
+            <a href="{{ url_for("main.user.signup") }}" class="button is-link is-light">{{ gettext('Create an account') }}</a>
+            <a href="{{ url_for("main.user.oauth_google") }}" class="button">
+                <span class="icon">
+                    <i class="fab fa-google"></i>
+                </span>
+                <span>Google</span>
+            </a>
+            <a href="{{ url_for("main.user.oauth_google") }}" class="button">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>GitHub</span>
+            </a>
+        </div>
+    </form>
+</div>
 {% endblock %}

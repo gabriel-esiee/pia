@@ -35,8 +35,6 @@
                 </label>
                 <p>{{ document.date }}</p>
             </div>
-        </div>
-        <div class="cell">
             <div class="field">
                 <label class="label">
                     {{ gettext('Associated damage') }}
@@ -45,6 +43,8 @@
                     {% include 'damage/preview.html' %}
                 {% endwith %}
             </div>
+        </div>
+        <div class="cell">
             {% if current_user.is_authenticated %}
             <div class="buttons">
                 <a href="{{ url_for('main.document.edit', document_id=document.id) }}" class="button is-primary" title="{{ gettext('Edit the document') }}">
