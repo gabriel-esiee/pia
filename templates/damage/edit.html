@@ -1,50 +1,45 @@
 {% extends "layout.html" %}
-{% block title %}Edit damage{% endblock %}
+{% block title %}{{ gettext('Edit damage #{}').format(damage.id) }}{% endblock %}
 
 {% block content %}
-
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    <div style="color: red;">
-        {{ messages[0] }}
-    </div>
-{% endif %}
-{% endwith %}
-
-<h1 class="title is-1">{{ gettext('Edit damage #{}').format(damage.id) }}</h1>
-<hr>
-<form method="post" action="{{ url_for("main.damage.edit", damage_id=damage.id) }}">
-    <div class="field">
-        <label class="label">{{ gettext('Description') }}</label>
-        <div class="control">
-            <textarea class="textarea" name="description" placeholder="{{ gettext('Your description here...') }}">{{damage.description}}</textarea>
+<section class="section">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% include 'messages.html' %}
+    {% endwith %}
+    <h1 class="title is-1">{{ gettext('Edit damage #{}').format(damage.id) }}</h1>
+    <hr>
+    <form method="post" action="{{ url_for("main.damage.edit", damage_id=damage.id) }}">
+        <div class="field">
+            <label class="label">{{ gettext('Description') }}</label>
+            <div class="control">
+                <textarea class="textarea" name="description" placeholder="{{ gettext('Your description here...') }}">{{damage.description}}</textarea>
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <label class="label">{{ gettext('State') }}</label>
-        <div class="control">
-          <div class="select">
-            <select name="state">
-                <option value="STARTED" {% if damage_state == 'STARTED' %}selected{% endif %}>STARTED</option>
-                <option value="PROCESSING" {% if damag_state == 'PROCESSING' %}selected{% endif %}>PROCESSING</option>
-                <option value="APPROVED" {% if damage_state == 'APPROVED' %}selected{% endif %}>APPROVED</option>
-                <option value="REJECTED" {% if damage_state == 'REJECTED' %}selected{% endif %}>REJECTED</option>
-                <option value="CLOSED" {% if damage_state == 'CLOSED' %}selected{% endif %}>CLOSED</option>
-            </select>
-          </div>
+        <div class="field">
+            <label class="label">{{ gettext('State') }}</label>
+            <div class="control">
+            <div class="select">
+                <select name="state">
+                    <option value="STARTED" {% if damage_state == 'STARTED' %}selected{% endif %}>STARTED</option>
+                    <option value="PROCESSING" {% if damag_state == 'PROCESSING' %}selected{% endif %}>PROCESSING</option>
+                    <option value="APPROVED" {% if damage_state == 'APPROVED' %}selected{% endif %}>APPROVED</option>
+                    <option value="REJECTED" {% if damage_state == 'REJECTED' %}selected{% endif %}>REJECTED</option>
+                    <option value="CLOSED" {% if damage_state == 'CLOSED' %}selected{% endif %}>CLOSED</option>
+                </select>
+            </div>
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <label class="label">{{ gettext('Latitude') }}</label>
-        <div class="control">
-            <input class="input" type="number" step="0.01" name="latitude" placeholder="0.0" value="{{damage.latitude}}" required>
+        <div class="field">
+            <label class="label">{{ gettext('Latitude') }}</label>
+            <div class="control">
+                <input class="input" type="number" step="0.01" name="latitude" placeholder="0.0" value="{{damage.latitude}}" required>
+            </div>
+            <label class="label">{{ gettext('Longitude') }}</label>
+            <div class="control">
+                <input class="input" type="number" step="0.01" name="longitude" placeholder="0.0" value="{{damage.longitude}}" required>
+            </div>
         </div>
-        <label class="label">{{ gettext('Longitude') }}</label>
-        <div class="control">
-            <input class="input" type="number" step="0.01" name="longitude" placeholder="0.0" value="{{damage.longitude}}" required>
-        </div>
-    </div>
-    <button class="button is-primary" type="submit">{{ gettext('Edit damage') }}</button>
-</form>
-
+        <button class="button is-primary" type="submit">{{ gettext('Edit damage') }}</button>
+    </form>
+</section>
 {% endblock %}

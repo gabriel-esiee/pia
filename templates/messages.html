@@ -1,0 +1,36 @@
+{% if messages %}
+    {% for category, message in messages %}
+        {% if category == 'success' %}
+        <div class="notification is-success">
+            <button class="delete"></button>
+            <span class="icon">
+                <i class="fas fa-check-circle"></i>
+            </span>
+            <span>
+                {{ message }}
+            </span>
+        </div>
+        {% else %}
+        <div class="notification is-danger">
+            <button class="delete"></button>
+            <span class="icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </span>
+            <span>
+                {{ message }}
+            </span>
+        </div>
+        {% endif %}
+    {% endfor %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            const $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+        });
+    </script>
+{% endif %}

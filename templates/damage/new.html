@@ -1,46 +1,41 @@
 {% extends "layout.html" %}
-{% block title %}Create new damage{% endblock %}
+{% block title %}{{ gettext('Declare a new damage') }}{% endblock %}
 
 {% block content %}
-
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    <div style="color: red;">
-        {{ messages[0] }}
-    </div>
-{% endif %}
-{% endwith %}
-
-<h1 class="title is-1">{{ gettext('Declare a new damage') }}</h1>
-<hr>
-<form method="post" action="{{ url_for('main.damage.new') }}">
-    <div class="field">
-        <label class="label">{{ gettext('Description') }}</label>
-        <div class="control">
-            <textarea class="textarea" name="description" placeholder="{{ gettext('Your description here...') }}"></textarea>
-        </div>
-    </div>
-    <div class="grid">
-        <div class="cell field">
-            <label class="label">{{ gettext('Latitude') }}</label>
+<section class="section">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% include 'messages.html' %}
+    {% endwith %}
+    <h1 class="title is-1">{{ gettext('Declare a new damage') }}</h1>
+    <hr>
+    <form method="post" action="{{ url_for('main.damage.new') }}">
+        <div class="field">
+            <label class="label">{{ gettext('Description') }}</label>
             <div class="control">
-                <input class="input" type="number" step="0.01" name="latitude" required value="0.0" placeholder="0.0">
+                <textarea class="textarea" name="description" placeholder="{{ gettext('Your description here...') }}"></textarea>
             </div>
         </div>
-        <div class="cell field">
-            <label class="label">{{ gettext('Longitude') }}</label>
-            <div class="control">
-                <input class="input" type="number" step="0.01" name="longitude" required value="0.0" placeholder="0.0">
+        <div class="grid">
+            <div class="cell field">
+                <label class="label">{{ gettext('Latitude') }}</label>
+                <div class="control">
+                    <input class="input" type="number" step="0.01" name="latitude" required value="0.0" placeholder="0.0">
+                </div>
+            </div>
+            <div class="cell field">
+                <label class="label">{{ gettext('Longitude') }}</label>
+                <div class="control">
+                    <input class="input" type="number" step="0.01" name="longitude" required value="0.0" placeholder="0.0">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="field">
-        <label class="label">{{ gettext('Date') }}</label>
-        <div class="control">
-            <input type="date" name="date" value="2024-11-15"/>
+        <div class="field">
+            <label class="label">{{ gettext('Date') }}</label>
+            <div class="control">
+                <input type="date" name="date" value="2024-11-15"/>
+            </div>
         </div>
-    </div>
-    <button class="button is-primary" type="submit">{{ gettext('Declare damage') }}</button>
-</form>
-
+        <button class="button is-primary" type="submit">{{ gettext('Declare damage') }}</button>
+    </form>
+</section>
 {% endblock %}

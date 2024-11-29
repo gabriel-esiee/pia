@@ -12,18 +12,20 @@ def signup_post(form):
     email = form.get('email')
     name = form.get('name')
     password = form.get('password')
+    if not email or not name or not password:
+        flash('Please provide a name, email and password to create an account.', 'error')
+        return redirect(url_for('main.user.signup'))
 
     user = User.query.filter_by(email=email).first()
-
     if user:
-        flash('Email address already exists')
+        flash('The email address you provide is already associated with an account.', 'error')
         return redirect(url_for('main.user.signup'))
 
     hash = generate_password_hash(password, method='pbkdf2:sha256')
     new_user = User(email=email, name=name, password=hash)
     insert(new_user)
 
-    flash('Your account has been created successfully. Please log in using your login details.')
+    flash('Your account has been created successfully. Please log in using your login details.', 'success')
     return redirect(url_for('main.user.login'))
 
 def login_get():
@@ -36,7 +38,7 @@ def login_post(form):
     user = User.query.filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
+        flash('Please check your login details and try again.', 'error')
         return redirect(url_for('main.user.login'))
 
     login_user(user, remember=remember)

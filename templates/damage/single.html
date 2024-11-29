@@ -2,104 +2,104 @@
 {% block title %}{{ gettext('Damage #{}').format(damage.id) }}{% endblock %}
 
 {% block content %}
-
-<div class="content">
-    <h1 class="title is-1">{{ gettext('Damage #{}').format(damage.id) }}</h1>
-    <hr>
-    <div class="grid">
-        <div class="cell">
-            <div class="field">
-                <label class="label">
-                    <span class="icon-text">
-                        <span class="icon"><i class="fas fa-pen"></i></span>
-                        <span>{{ gettext('Description') }}</span>
-                    </span>
-                </label>
-                <p>{{ damage.description }}</p>
+<section class="section">
+    <div class="content">
+        <h1 class="title is-1">{{ gettext('Damage #{}').format(damage.id) }}</h1>
+        <hr>
+        <div class="grid">
+            <div class="cell">
+                <div class="field">
+                    <label class="label">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-pen"></i></span>
+                            <span>{{ gettext('Description') }}</span>
+                        </span>
+                    </label>
+                    <p>{{ damage.description }}</p>
+                </div>
+                <div class="field">
+                    <label class="label">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-check-square"></i></span>
+                            <span>{{ gettext('State') }}</span>
+                        </span>
+                    </label>
+                    <p>{{ damage.state }}</p>
+                </div>
+                <div class="field">
+                    <label class="label">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-calendar"></i></span>
+                            <span>{{ gettext('Date') }}</span>
+                        </span>
+                    </label>
+                    <p>{{ damage.date }}</p>
+                </div>
+                <div class="field">
+                    <label class="label">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-location-arrow"></i></span>
+                            <span>{{ gettext('Location') }}</span>
+                        </span>
+                    </label>
+                    <p>({{ damage.latitude }}, {{ damage.longitude }})</p>
+                </div>
             </div>
-            <div class="field">
-                <label class="label">
-                    <span class="icon-text">
-                        <span class="icon"><i class="fas fa-check-square"></i></span>
-                        <span>{{ gettext('State') }}</span>
-                    </span>
-                </label>
-                <p>{{ damage.state }}</p>
-            </div>
-            <div class="field">
-                <label class="label">
-                    <span class="icon-text">
-                        <span class="icon"><i class="fas fa-calendar"></i></span>
-                        <span>{{ gettext('Date') }}</span>
-                    </span>
-                </label>
-                <p>{{ damage.date }}</p>
-            </div>
-            <div class="field">
-                <label class="label">
-                    <span class="icon-text">
-                        <span class="icon"><i class="fas fa-location-arrow"></i></span>
-                        <span>{{ gettext('Location') }}</span>
-                    </span>
-                </label>
-                <p>({{ damage.latitude }}, {{ damage.longitude }})</p>
-            </div>
-        </div>
-        <div class="cell">
-            <div class="field">
-                <label class="label">
-                    <span class="icon-text">
-                        <span class="icon"><i class="fas fa-user"></i></span>
-                        <span>{{ gettext('Insured') }}</span>
-                    </span>
-                </label>
-                <p>{{ damage.insured.name }} ({{ damage.insured.email }})</p>
-            </div>
-            <div class="field">
-                <label class="label">
-                    <span class="icon-text">
-                        <span class="icon"><i class="fas fa-user"></i></span>
-                        <span>{{ gettext('Impaired') }}</span>
-                    </span>
-                </label>
-                <p>{{ damage.impaired.name }} ({{ damage.insured.email }})</p>
-            </div>
-            {% if current_user.is_authenticated %}
-            <div class="buttons">
-                <a href="{{ url_for('main.damage.edit', damage_id=damage.id) }}" class="button is-primary" title="{{ gettext('Edit the damage') }}">
-                    <span class="icon">
-                        <i class="fas fa-pen"></i>
-                    </span>
-                    <span>{{ gettext('Edit the damage') }}</span>
-                </a>
-                {% if current_user.is_admin() %}
-                <a href="{{ url_for('main.damage.delete', damage_id=damage.id) }}" class="button is-danger" title="{{ gettext('Delete the damage') }}">
-                    <span class="icon">
-                        <i class="fas fa-trash"></i>
-                    </span>
-                    <span>{{ gettext('Delete the damage') }}</span>
-                </a>
+            <div class="cell">
+                <div class="field">
+                    <label class="label">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-user"></i></span>
+                            <span>{{ gettext('Insured') }}</span>
+                        </span>
+                    </label>
+                    <p>{{ damage.insured.name }} ({{ damage.insured.email }})</p>
+                </div>
+                <div class="field">
+                    <label class="label">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-user"></i></span>
+                            <span>{{ gettext('Impaired') }}</span>
+                        </span>
+                    </label>
+                    <p>{{ damage.impaired.name }} ({{ damage.insured.email }})</p>
+                </div>
+                {% if current_user.is_authenticated %}
+                <div class="buttons">
+                    <a href="{{ url_for('main.damage.edit', damage_id=damage.id) }}" class="button is-primary" title="{{ gettext('Edit the damage') }}">
+                        <span class="icon">
+                            <i class="fas fa-pen"></i>
+                        </span>
+                        <span>{{ gettext('Edit the damage') }}</span>
+                    </a>
+                    {% if current_user.is_admin() %}
+                    <a href="{{ url_for('main.damage.delete', damage_id=damage.id) }}" class="button is-danger" title="{{ gettext('Delete the damage') }}">
+                        <span class="icon">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span>{{ gettext('Delete the damage') }}</span>
+                    </a>
+                    {% endif %}
+                </div>
                 {% endif %}
             </div>
+        </div>
+        <h3 class="title is-3">{{ gettext('Associated documents') }}</h3>
+        <div class="buttons">
+            {% for document in damage.documents %}
+                {% with document=document %}
+                    {% include 'document/preview.html' %}
+                {% endwith %}
+            {% endfor %}
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('main.document.new', damage=damage.id) }}" class="button is-primary is-light">
+                <span class="icon is-small">
+                    <i class="fas fa-upload"></i>
+                </span>
+                <span>{{ gettext('Upload a new document') }}</span>
+            </a>
             {% endif %}
         </div>
     </div>
-    <h3 class="title is-3">{{ gettext('Associated documents') }}</h3>
-    <div class="buttons">
-        {% for document in damage.documents %}
-            {% with document=document %}
-                {% include 'document/preview.html' %}
-            {% endwith %}
-        {% endfor %}
-        {% if current_user.is_authenticated %}
-        <a href="{{ url_for('main.document.new', damage=damage.id) }}" class="button is-primary is-light">
-            <span class="icon is-small">
-                <i class="fas fa-upload"></i>
-            </span>
-            <span>{{ gettext('Upload a new document') }}</span>
-        </a>
-        {% endif %}
-    </div>
-</div>
-
+</section>
 {% endblock %}
