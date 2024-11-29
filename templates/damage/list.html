@@ -8,7 +8,8 @@
     {% if not damages %}
         <p>{{ gettext("There is no damage for the moment") }}</p>
     {% else %}
-    <table class="table">
+    <div class="table-container">
+    <table class="table is-hoverable">
         <thead>
             <tr>
                 <th scope="col">{{ gettext("Identifier") }}</th>
@@ -24,7 +25,7 @@
             {% for damage in damages %}
             <tr>
                 <th scope="row">{{ damage.id }}</th>
-                <td>{{ damage.description }}</td>
+                <td>{{ damage.description|truncate(100) }}</td>
                 <td>({{ damage.latitude }}, {{ damage.longitude }})</td>
                 <td>{{ damage.date.strftime('%d/%m/%Y') }}</td>
                 <td>{{ damage.insured.name }}</td>
@@ -63,6 +64,7 @@
             </tr>
         </tfoot>
     </table>
+    </div>
     {% endif %}
 </section>
 {% endblock %}
