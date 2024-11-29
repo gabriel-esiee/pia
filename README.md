@@ -1,7 +1,6 @@
 # TODO
 
-- Document upload and approve system
-- List impaired damages on a user (not only insured damages)
+- Document upload
 - Correct logging system
 - Communication between investigator and user via websockets
 - Unit testing

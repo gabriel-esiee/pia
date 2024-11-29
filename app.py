@@ -1,4 +1,3 @@
-import os
 from flask import Flask, request, render_template
 
 from extensions import db
@@ -30,8 +29,6 @@ def resource_not_found(error):
 
 db.init_app(app)
 
-with app.app_context(): db.create_all()
-
 # Babel initialization?
 
 def get_locale():
@@ -50,13 +47,11 @@ def load_user(user_id):
 
 # OAuth initialization.
 
-app.config['GOOGLE_CLIENT_ID'] = '72701988235-3bqpnaugrhnl6ktte3ub4i6le7osc9lg.apps.googleusercontent.com'
-app.config['GOOGLE_CLIENT_SECRET'] = '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'
-
 oauth.init_app(app)
 
 # Start the application.
 
 if __name__ == "__main__":
+    import os
     port = os.environ.get("PORT", 5000)
     app.run(debug=False, host='0.0.0.0', port=port)
