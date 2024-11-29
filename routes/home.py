@@ -1,8 +1,8 @@
 from flask import Blueprint
-from app.routes.user import user_blueprint
-from app.routes.damage import damage_blueprint
-from app.routes.document import document_blueprint
-from app.controllers.home import home_get
+from routes.user import user_blueprint
+from routes.damage import damage_blueprint
+from routes.document import document_blueprint
+from controllers.home import home_get
 
 main_blueprint = Blueprint('main', __name__, template_folder='templates')
 

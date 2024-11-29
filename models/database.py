@@ -1,14 +1,12 @@
-from flask_sqlalchemy import SQLAlchemy
+from extensions import db
 
-db = SQLAlchemy()
-
-def insert(o):
+def db_insert(o):
     db.session.add(o)
-    commit()
+    db_commit()
 
-def pop(o):
+def db_pop(o):
     db.session.delete(o)
-    commit()
+    db_commit()
 
-def commit():
+def db_commit():
     db.session.commit()

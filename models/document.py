@@ -1,6 +1,6 @@
 from datetime import datetime
-from app.models.database import db
-from app.models.documentState import DocumentState
+from extensions import db
+from models.document_state import DocumentState
 
 class Document(db.Model):
     id = db.Column(db.Integer, primary_key=True)

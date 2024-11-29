@@ -2,9 +2,9 @@ from datetime import datetime
 from flask import render_template, redirect, url_for, abort
 from flask_login import current_user
 
-from app.models.database import insert, pop, commit
-from app.models.damage import Damage
-from app.models.damageState import DamageState, StateToString, StringToState
+from models.database import db_insert, db_pop, db_commit
+from models.damage import Damage
+from models.damage_state import DamageState, DamageStateToString, StringToDamageState
 
 def all_get():
     # Check that the user is authorized to manage damages
@@ -44,14 +44,14 @@ def new_post(form):
     date = datetime.strptime(form.get('date'), '%Y-%m-%d')
     # Create new damage and insert into database
     new_damage = Damage(description=description, latitude=latitude, longitude=longitude, date=date, insured=current_user, impaired=current_user)
-    insert(new_damage)
+    db_insert(new_damage)
     # Redirect to the list of damages (depend on the role of the user) to see the new damage
     return redirect(url_for(current_user.list_endpoint()))
 
 def edit_get(damage_id):
     damage = Damage.query.get(damage_id)
     if damage:
-        return render_template('damage/edit.html', damage=damage, damage_state=StateToString(damage.state))
+        return render_template('damage/edit.html', damage=damage, damage_state=DamageStateToString(damage.state))
     else:
         abort(404)
 
@@ -60,8 +60,8 @@ def edit_post(damage_id, form):
     damage.description = form.get('description')
     damage.latitude = form.get('latitude')
     damage.longitude = form.get('longitude')
-    damage.state = StringToState(form.get('state'))
-    commit()
+    damage.state = StringToDamageState(form.get('state'))
+    db_commit()
     return redirect(url_for('main.damage.single', damage_id=damage_id))
 
 def delete_get(damage_id):
@@ -70,5 +70,5 @@ def delete_get(damage_id):
         abort(403)
     else:
         damage = Damage.query.get_or_404(damage_id)
-        pop(damage)
+        db_pop(damage)
         return redirect(url_for(current_user.list_endpoint()))

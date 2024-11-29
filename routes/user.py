@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.controllers.user import signup_get, signup_post, login_get, login_post, logout_get, profile_get, damages_get, oauth_google_get, authorize_google_get
+from controllers.user import signup_get, signup_post, login_get, login_post, logout_get, profile_get, damages_get, oauth_google_get, authorize_google_get
 
 user_blueprint = Blueprint('user', __name__)
 

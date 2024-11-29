@@ -1,9 +1,10 @@
-from flask import render_template, redirect, url_for, flash, session
+from flask import render_template, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user
-from app import google
-from app.models.database import insert
-from app.models.user import User
+
+from extensions import google
+from models.database import db_insert
+from models.user import User
 
 def signup_get():
     return render_template('user/signup.html')
@@ -23,7 +24,7 @@ def signup_post(form):
 
     hash = generate_password_hash(password, method='pbkdf2:sha256')
     new_user = User(email=email, name=name, password=hash)
-    insert(new_user)
+    db_insert(new_user)
 
     flash('Your account has been created successfully. Please log in using your login details.', 'success')
     return redirect(url_for('main.user.login'))
@@ -60,14 +61,12 @@ def authorize_google_get():
         login_user(user)
     else:
         new_user = User(email=email, name=name)
-        insert(new_user)
+        db_insert(new_user)
         login_user(new_user)
 
-    # session['user'] = user_info
     return redirect(url_for('main.user.profile'))
 
 def logout_get():
-    session.pop('user', None)
     logout_user()
     return redirect(url_for('main.user.login'))
 

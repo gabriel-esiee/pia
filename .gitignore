@@ -58,6 +58,9 @@ cover/
 # Translations
 *.pot
 
+# VSCode
+.vscode
+
 # Django stuff:
 *.log
 local_settings.py

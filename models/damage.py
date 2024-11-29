@@ -1,6 +1,6 @@
 from datetime import datetime
-from app.models.database import db
-from app.models.damageState import DamageState
+from extensions import db
+from models.damage_state import DamageState
 
 class Damage(db.Model):
     id = db.Column(db.Integer, primary_key=True)

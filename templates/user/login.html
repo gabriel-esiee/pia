@@ -7,7 +7,7 @@
         <h1 class="title is-1">{{ gettext('Login to your account') }}</h1>
         <hr>
         {% with messages = get_flashed_messages(with_categories=True) %}
-            {% include 'messages.html' %}
+            {% include 'message.html' %}
         {% endwith %}
         <form method="post" action="{{ url_for('main.user.login') }}">
             <div class="field">

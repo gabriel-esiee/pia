@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.controllers.damage import all_get, unresolved_get, single_get, new_get, new_post, edit_get, edit_post, delete_get
+from controllers.damage import all_get, unresolved_get, single_get, new_get, new_post, edit_get, edit_post, delete_get
 
 damage_blueprint = Blueprint('damage', __name__)
 

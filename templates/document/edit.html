@@ -4,7 +4,7 @@
 {% block content %}
 <section class="section">
     {% with messages = get_flashed_messages(with_categories=True) %}
-        {% include 'messages.html' %}
+        {% include 'message.html' %}
     {% endwith %}
     <h1 class="title is-1">{{ gettext('Edit document #{}').format(document.id) }}</h1>
     <hr>

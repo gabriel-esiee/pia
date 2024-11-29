@@ -7,7 +7,7 @@ class DamageState(enum.Enum):
     REJECTED = "REJECTED"
     CLOSED = "CLOSED"
 
-def StateToString(state) -> str:
+def DamageStateToString(state) -> str:
     if state == DamageState.STARTED:
         return 'STARTED'
     if state == DamageState.PROCESSING:
@@ -19,7 +19,7 @@ def StateToString(state) -> str:
     elif state == DamageState.CLOSED:
         return 'CLOSED'
 
-def StringToState(string) -> str:
+def StringToDamageState(string) -> str:
     if string == 'STARTED':
         return DamageState.STARTED
     if string == 'PROCESSING':

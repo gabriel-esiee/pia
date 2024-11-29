@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.controllers.document import single_get, new_get, new_post, edit_get, edit_post, delete_get
+from controllers.document import single_get, new_get, new_post, edit_get, edit_post, delete_get
 
 document_blueprint = Blueprint('document', __name__)
 
