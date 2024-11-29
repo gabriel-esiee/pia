@@ -43,13 +43,13 @@
                     <span class="icon">
                         <i class="fab fa-google"></i>
                     </span>
-                    <span>Google</span>
+                    <span>{{ gettext('Connect with Google') }}</span>
                 </a>
-                <a href="{{ url_for("main.user.oauth_google") }}" class="button">
+                <a href="{{ url_for("main.user.oauth_github") }}" class="button">
                     <span class="icon">
                         <i class="fab fa-github"></i>
                     </span>
-                    <span>GitHub</span>
+                    <span>{{ gettext('Connect with GitHub') }}</span>
                 </a>
             </div>
         </form>

@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user
 
-from extensions import google
+from extensions import google, github
 from models.database import db_insert
 from models.user import User
 
@@ -46,6 +46,17 @@ def login_post(form):
     
     return redirect(url_for('main.user.profile'))
 
+def logout_get():
+    logout_user()
+    return redirect(url_for('main.user.login'))
+
+def profile_get():
+    return render_template('user/profile.html')
+
+def damages_get():
+    return render_template('damage/list.html', title="All your damages", damages=current_user.insured_damages)
+
+
 def oauth_google_get():
     redirect_uri = url_for('main.user.authorize_google', _external=True)
     return google.authorize_redirect(redirect_uri)
@@ -66,12 +77,29 @@ def authorize_google_get():
 
     return redirect(url_for('main.user.profile'))
 
-def logout_get():
-    logout_user()
-    return redirect(url_for('main.user.login'))
+def oauth_github_get():
+    redirect_uri = url_for('main.user.authorize_github', _external=True)
+    return github.authorize_redirect(redirect_uri)
 
-def profile_get():
-    return render_template('user/profile.html')
+def authorize_github_get():
+    token = github.authorize_access_token()
+    # Ask for profile and emails informations.
+    user_info = github.get('user').json()
+    email_info = github.get('user/emails').json()
+    name = user_info['name']
+    # Get the primary email from user's email list.
+    email = email_info[0]['email']
+    for e in email_info:
+        if e['primary']:
+            email = e['email']
+            break
+    
+    user = User.query.filter_by(email=email).first()
+    if user:
+        login_user(user)
+    else:
+        new_user = User(email=email, name=name)
+        db_insert(new_user)
+        login_user(new_user)
 
-def damages_get():
-    return render_template('damage/list.html', title="All your damages", damages=current_user.insured_damages)
+    return redirect(url_for('main.user.profile'))
