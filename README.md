@@ -1,10 +1,10 @@
 # TODO
 
+- Unit testing on damage management
+- Change langage button
 - Document data upload
 - Responsive layout
-- Change langage button
 - Communication between users via websockets
-- Unit testing on damage management
 - Use logger system (with log levels)
 - Documentation for API
 - Commentaries in source code

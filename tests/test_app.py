@@ -1,6 +1,5 @@
 import pytest
 from app import app
-from models.damage_state import DamageState
 
 @pytest.fixture
 def client():
@@ -11,5 +10,4 @@ def client():
 def test_home(client):
     """Test the home route."""
     response = client.get('/')
-    s = DamageState.APPROVED
     assert response.status_code == 200
