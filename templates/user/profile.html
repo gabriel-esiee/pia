@@ -8,8 +8,8 @@
     {% with messages = get_flashed_messages(with_categories=True) %}
         {% include 'message.html' %}
     {% endwith %}
-    <div class="grid">
-        <div class="cell">
+    <div class="columns">
+        <div class="column">
             <div class="field">
                 <label class="label">
                     <span class="icon-text">
@@ -38,7 +38,7 @@
                 <p>{{ current_user.role }}</p>
             </div>
         </div>
-        <div class="cell">
+        <div class="column">
             <div class="buttons">
                 <a href="{{ url_for('main.damage.new') }}" class="button is-primary is-light">
                     <span class="icon is-small">
