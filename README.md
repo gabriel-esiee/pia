@@ -1,9 +1,13 @@
 # TODO
 
-- Document upload
-- Correct logging system
-- Communication between investigator and user via websockets
-- Unit testing
+- Document data upload
+- Responsive layout
+- Change langage button
+- Communication between users via websockets
+- Unit testing on damage management
+- Use logger system (with log levels)
+- Documentation for API
+- Commentaries in source code
 
 # Configuration
 
