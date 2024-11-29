@@ -27,6 +27,6 @@ jobs:
           DATABASE_URL: ${{secrets.APP_DATABASE_URL}}
           GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
           GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
-          GITHUB_CLIENT_ID: ${{secrets.GITHUB_CLIENT_ID}}
-          GITHUB_CLIENT_SECRET: ${{secrets.GITHUB_CLIENT_SECRET}}
+          GITHUB_CLIENT_ID: ${{secrets.GHUB_CLIENT_ID}}
+          GITHUB_CLIENT_SECRET: ${{secrets.GHUB_CLIENT_SECRET}}
         run: pytest
