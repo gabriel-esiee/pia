@@ -12,4 +12,4 @@ def test_home(client):
     """Test the home route."""
     response = client.get('/')
     s = DamageState.APPROVED
-    assert response.status_code == 200
+    assert response.status_code == 201
