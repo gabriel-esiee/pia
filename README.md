@@ -1,7 +1,6 @@
 # TODO
 
 - Unit testing on damage management
-- Change langage button
 - Document data upload
 - Responsive layout
 - Communication between users via websockets

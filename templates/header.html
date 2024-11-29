@@ -1,7 +1,7 @@
 <header>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <a role="button" class="navbar-burger is-light" aria-label="menu" aria-expanded="false">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -10,7 +10,7 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="{{ url_for('main.index') }}">
+                <a class="navbar-item" href="{{ url_for('main.home') }}">
                     <span class="icon is-small">
                         <i class="fas fa-home"></i>
                     </span>
@@ -22,16 +22,33 @@
                 {% endif %}
             </div>
             <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link is-arrowless">
+                      <span>
+                        <span class="icon is-small">
+                            <i class="fas fa-globe-americas"></i>
+                        </span>
+                      </span>
+                    </a>
+                    <div class="navbar-dropdown">
+                      <a class="navbar-item" href="{{ url_for('main.language', language='en') }}">
+                        English 🇬🇧
+                      </a>
+                      <a class="navbar-item" href="{{ url_for('main.language', language='fr') }}">
+                        Français 🇫🇷
+                      </a>
+                    </div>
+                </div>
                 <div class="navbar-item">
                     <div class="buttons">
                         {% if current_user.is_authenticated %}
-                        <a class="button is-primary" href="{{ url_for('main.user.profile') }}">
+                        <a class="button is-light" href="{{ url_for('main.user.profile') }}">
                             <span class="icon is-small">
                                 <i class="fas fa-user"></i>
                             </span>
                             <span>{{ gettext('Profile') }}</span>
                         </a>
-                        <a class="button is-danger" href="{{ url_for('main.user.logout') }}">
+                        <a class="button is-light is-outlined" href="{{ url_for('main.user.logout') }}">
                             <span class="icon is-small">
                                 <i class="fas fa-sign-out-alt"></i>
                             </span>
@@ -39,7 +56,7 @@
                         </a>
                         {% endif %}
                         {% if not current_user.is_authenticated %}
-                        <a class="button is-primary" href="{{ url_for('main.user.signup') }}"><strong>{{ gettext('Sign up') }}</strong></a>
+                        <a class="button is-dark" href="{{ url_for('main.user.signup') }}"><strong>{{ gettext('Sign up') }}</strong></a>
                         <a class="button is-light" href="{{ url_for('main.user.login') }}">{{ gettext('Log in') }}</a>
                         {% endif %}
                     </div>

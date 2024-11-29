@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, session, render_template
 
 from extensions import db
 from extensions import login_manager
@@ -29,10 +29,12 @@ def resource_not_found(error):
 
 db.init_app(app)
 
-# Babel initialization?
+# Babel initialization.
 
 def get_locale():
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    if not session['language']:
+        session['language'] = request.accept_languages.best_match(app.config['LANGUAGES'])
+    return session['language']
 
 babel.init_app(app, locale_selector=get_locale)
 
