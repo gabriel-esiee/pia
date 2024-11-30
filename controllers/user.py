@@ -58,7 +58,7 @@ def damages_get():
 
 
 def oauth_google_get():
-    redirect_uri = url_for('main.user.authorize_google', _external=True)
+    redirect_uri = url_for('main.user.authorize_google', _external=True, _scheme='https')
     return google.authorize_redirect(redirect_uri)
 
 def authorize_google_get():
@@ -78,7 +78,7 @@ def authorize_google_get():
     return redirect(url_for('main.user.profile'))
 
 def oauth_github_get():
-    redirect_uri = url_for('main.user.authorize_github', _external=True)
+    redirect_uri = url_for('main.user.authorize_github', _external=True, _scheme='https')
     return github.authorize_redirect(redirect_uri)
 
 def authorize_github_get():
