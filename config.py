@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 LANGUAGES = ["en", "fr"]
+
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 database_url = os.environ.get('DATABASE_URL')

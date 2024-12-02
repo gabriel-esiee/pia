@@ -38,8 +38,8 @@
                     <span>{{ gettext('Home') }}</span>
                 </a>
                 {% if current_user.is_authenticated and current_user.is_admin() %}
-                <a class="navbar-item" href="{{ url_for('main.damage.all') }}">{{ gettext('All damages') }}</a>
-                <a class="navbar-item" href="{{ url_for('main.damage.unresolved') }}">{{ gettext('All unresolved damages') }}</a>
+                <a class="navbar-item" href="{{ url_for('main.damage.all') }}">{{ gettext('Damages') }}</a>
+                <a class="navbar-item" href="{{ url_for('main.damage.unresolved') }}">{{ gettext('Unresolved') }}</a>
                 {% endif %}
             </div>
             <div class="navbar-end">

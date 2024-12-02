@@ -1,6 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user
+from flask_babel import gettext
 
 from extensions import google, github
 from models.database import db_insert
@@ -54,8 +55,8 @@ def profile_get():
     return render_template('user/profile.html')
 
 def damages_get():
-    return render_template('damage/list.html', title="All your damages", damages=current_user.insured_damages)
-
+    title = gettext("All damages")
+    return render_template('damage/list.html', title=title, damages=current_user.insured_damages)
 
 def oauth_google_get():
     redirect_uri = url_for('main.user.authorize_google', _external=True, _scheme='https')

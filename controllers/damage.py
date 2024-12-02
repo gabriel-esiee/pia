@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import render_template, redirect, url_for, abort
 from flask_login import current_user
+from flask_babel import lazy_gettext
 
 from models.database import db_insert, db_pop, db_commit
 from models.damage import Damage
@@ -13,7 +14,8 @@ def all_get():
     else:
         # Fetch all damages of the database and render them inside a table
         damages = Damage.query.all()
-        return render_template('damage/list.html', title="All damages", damages=damages)
+        title = lazy_gettext('All damages')
+        return render_template('damage/list.html', title=title, damages=damages)
 
 def unresolved_get():
     # Check that the user is authorized to manage damages
@@ -22,7 +24,8 @@ def unresolved_get():
     else:
         # Fetch all unresolved damages of the database and render them inside a table
         damages = Damage.query.filter(Damage.state != DamageState.CLOSED).all()
-        return render_template('damage/list.html', title="All unresolved damages", damages=damages)
+        title = lazy_gettext('All unresolved damages')
+        return render_template('damage/list.html', title=title, damages=damages)
 
 def single_get(damage_id):
     damage = Damage.query.get(damage_id)
