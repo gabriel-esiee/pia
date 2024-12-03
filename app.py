@@ -1,4 +1,5 @@
 from flask import Flask, request, session, render_template
+from logging.config import dictConfig
 
 from extensions import db
 from extensions import login_manager
@@ -7,6 +8,24 @@ from extensions import babel
 
 from routes.home import main_blueprint
 from models.user import User
+
+# Configure logging system.
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
 
 # Create Flask application.
 
