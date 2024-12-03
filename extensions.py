@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from authlib.integrations.flask_client import OAuth
 from flask_babel import Babel
+from flask_socketio import SocketIO
 
 # Database instantiate.
 
@@ -38,3 +39,7 @@ github = oauth.register(
 # Babel instantiate.
 
 babel = Babel()
+
+# Socket instantiate.
+
+socket = SocketIO()

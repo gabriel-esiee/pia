@@ -1,10 +1,13 @@
 from flask import Flask, request, session, render_template
+from flask_socketio import send
+from flask_login import current_user
 from logging.config import dictConfig
 
 from extensions import db
 from extensions import login_manager
 from extensions import oauth
 from extensions import babel
+from extensions import socket
 
 from routes.home import main_blueprint
 from models.user import User
@@ -67,6 +70,27 @@ def load_user(user_id):
 # OAuth initialization.
 
 oauth.init_app(app)
+
+# Socket initialization.
+
+socket.init_app(app)
+
+@socket.on('connect')
+def handle_connect():
+    app.logger.info('socket client connected.')
+
+@socket.on('disconnect')
+def handle_disconnect():
+    app.logger.info('socket client disconnected.')
+
+@socket.on('message')
+def handle_message(msg):
+    app.logger.info('socket received message: %s', msg)
+    message = {
+        'author': current_user.name,
+        'message': msg
+    }
+    send(message, broadcast=True)
 
 # Start the application.
 
