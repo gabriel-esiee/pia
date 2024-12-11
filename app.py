@@ -1,6 +1,7 @@
-from flask import Flask, request, session, render_template
+from flask import Flask, request, session, render_template, abort
 from flask_socketio import send
 from flask_login import current_user
+from werkzeug.exceptions import Unauthorized, NotFound, BadRequest
 from logging.config import dictConfig
 
 from extensions import db
@@ -9,7 +10,7 @@ from extensions import oauth
 from extensions import babel
 from extensions import socket
 
-from routes.home import main_blueprint
+from controllers.home import main_blueprint
 from models.user import User
 
 # Configure logging system.
@@ -39,11 +40,18 @@ app.register_blueprint(main_blueprint)
 
 # Handle errors.
 
+@app.errorhandler(400)
+@app.errorhandler(BadRequest)
+def request_incorrect(error):
+    return render_template('400.html'), 400
+
 @app.errorhandler(403)
+@app.errorhandler(Unauthorized)
 def resource_forbidden(error):
     return render_template('403.html'), 403
 
 @app.errorhandler(404)
+@app.errorhandler(NotFound)
 def resource_not_found(error):
     return render_template('404.html'), 404
 
@@ -66,6 +74,10 @@ login_manager.login_view = 'main.user.login'
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    abort(403)
 
 # OAuth initialization.
 

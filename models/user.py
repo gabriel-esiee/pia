@@ -11,9 +11,3 @@ class User(UserMixin, db.Model):
     
     def is_admin(self) -> bool:
         return self.role == UserRole.INVESTIGATOR
-    
-    def list_endpoint(self) -> str:
-        if self.is_admin():
-            return 'main.damage.all'
-        else:
-            return 'main.user.damages'
